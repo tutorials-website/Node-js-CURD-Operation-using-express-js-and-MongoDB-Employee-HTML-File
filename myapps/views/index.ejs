@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+     
+   <div class="container">
+        <div class="row">
+            <h1>Filter Employee Records</h1>
+     <div class="col-md-12">
+        <form action="/search/" id="EmployeeForm" class="form-horizontal" method="post"  role="form">
+                    
+       <div class="col-md-3">
+          <div class="form-group">
+              <label for="name" class="col-md-12 control-label">By Name</label>
+              <div class="col-md-12">
+                  <input type="text" class="form-control" name="fltrname" placeholder="Enter Name">
+              </div>
+          </div>
+       </div>
+       <div class="col-md-3">
+          <div class="form-group">
+              <label for="email" class="col-md-12 control-label">By Email</label>
+              <div class="col-md-12">
+                  <input type="text" class="form-control" name="fltremail" placeholder="Enter Email">
+              </div>
+          </div>
+       </div>
+       <div class="col-md-3">
+          <div class="form-group">
+              <label for="email" class="col-md-12 control-label">By Employee Type</label>
+              <div class="col-md-12">
+                  <select class="form-control" name="fltremptype">
+                      <option value="Hourly">Hourly</option>
+                      <option value="Fixed">Fixed</option>
+                    </select></div>
+          </div>
+       </div>
+       <div class="col-md-3">
+          <div class="form-group">
+              <label for="email" class="col-md-12 control-label">&nbsp;</label>
+             
+               <div class="col-md-12">
+                  <input type="submit" class="form-control btn btn-primary" name="submit" placeholder="Filter">
+              </div>
+          </div>
+       </div>
+</form>
+     </div>
+          </div>
+        </div>
+    
+    <div class="container">
+      <div class="row">
+          <h1><%= title %></h1>
+       <table class="table table-striped table-primary">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Emp Type</th>
+            <th>Hourly Rate</th>
+            <th>Total Hours</th>
+            <th>Total Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%if (records.length >0){ %>
+          <% records.forEach(function(row){ %>
+          <tr>
+            <td><%= row.name %></td>
+            <td><%= row.email %></td>
+            <td><%= row.etype %></td>
+            <td><%= row.hourlyrate %></td>
+            <td><%= row.totalHour %></td>
+            <td><%= row.total %></td>
+          </tr>
+          <% })}else{ %>
+            <tr>
+                <td colspan="6">No Record Found</td>
+                
+              </tr>
+            <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+        <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">Employee Details Form</div>
+                     </div>  
+                <div class="panel-body" >
+                    <form action="/" id="EmployeeForm" class="form-horizontal" method="post"  role="form">
+                        
+                        <div id="signupalert" style="display:none" class="alert alert-danger">
+                            <p>Error:</p>
+                            <span></span>
+                        </div>
+                            
+                        <div class="form-group">
+                            <label for="firstname" class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="uname" placeholder="Enter Your Name">
+                            </div>
+                        </div>
+                          
+                        <div class="form-group">
+                            <label for="email" class="col-md-3 control-label">Email</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="email" placeholder="Email Address">
+                            </div>
+                        </div>
+                            
+                        
+                        <div class="form-group">
+                            <label for="lastname" class="col-md-3 control-label">Employee Type</label>
+                            <div class="col-md-9">
+ <select class="form-control" name="emptype">
+   <option value="Hourly">Hourly</option>
+   <option value="Fixed">Fixed</option>
+ </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-md-3 control-label">Hourly Rate</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="hrlyrate" placeholder="Enter Hourly Rate">
+                            </div>
+                        </div>
+                            
+                        <div class="form-group">
+                            <label for="icode" class="col-md-3 control-label"> Total Hour</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="ttlhr" placeholder="Enter Total Hours">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <!-- Button -->                                        
+                            <div class="col-md-offset-3 col-md-9">
+                            <input type="submit" name="submit" value="submit" class="btn btn-primary">   
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                    </form>
+                 </div>
+            </div>
+
+       
+       
+        
+ </div> 
+    </div>
+  </div>
+  </body>
+</html>
