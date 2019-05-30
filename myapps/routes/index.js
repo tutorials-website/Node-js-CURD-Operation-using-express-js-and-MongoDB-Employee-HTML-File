@@ -7,7 +7,7 @@ var employee =empModel.find({});
 router.get('/', function(req, res, next) {
   employee.exec(function(err,data){
 if(err) throw err;
-res.render('index', { title: 'Employee Records', records:data });
+res.render('index', { title: 'Employee Records', records:data, success:'' });
   });
   
 });
@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
     if(err) throw err;
     employee.exec(function(err,data){
       if(err) throw err;
-      res.render('index', { title: 'Employee Records', records:data });
+      res.render('index', { title: 'Employee Records', records:data, success:'Record Inserted Successfully' });
         });
   })
   
@@ -68,6 +68,48 @@ router.post('/search/', function(req, res, next) {
   
 });
 
+router.get('/delete/:id', function(req, res, next) {
+var id=req.params.id;
+var del= empModel.findByIdAndDelete(id);
 
+del.exec(function(err){
+if(err) throw err;
+employee.exec(function(err,data){
+  if(err) throw err;
+  res.render('index', { title: 'Employee Records', records:data, success:'Record Deleted Successfully' });
+    });
+  });
+  
+});
+
+router.get('/edit/:id', function(req, res, next) {
+  var id=req.params.id;
+var edit= empModel.findById(id);
+edit.exec(function(err,data){
+if(err) throw err;
+res.render('edit', { title: 'Edit Employee Record', records:data });
+  });
+  
+});
+
+router.post('/update/', function(req, res, next) {
+ 
+var update= empModel.findByIdAndUpdate(req.body.id,{
+  name: req.body.uname,
+    email: req.body.email,
+    etype: req.body.emptype,
+    hourlyrate: req.body.hrlyrate,
+    totalHour: req.body.ttlhr,
+    total: parseInt(req.body.hrlyrate) * parseInt(req.body.ttlhr),
+});
+update.exec(function(err,data){
+if(err) throw err;
+employee.exec(function(err,data){
+  if(err) throw err;
+  res.render('index', { title: 'Employee Records', records:data, success:'Record Updated Successfully' });
+    });
+  });
+  
+});
 
 module.exports = router;
