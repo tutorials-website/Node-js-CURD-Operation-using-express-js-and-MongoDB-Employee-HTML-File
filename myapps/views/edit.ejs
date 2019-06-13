@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+   
+  <div class="container">
+    <div class="row">
+        <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title"><%= title %></div>
+                     </div>  
+                <div class="panel-body" >
+                    <form action="/update/" id="EmployeeForm" class="form-horizontal" method="post"  role="form">
+                        <input type="hidden" name="id" value="<%= records._id %>">
+                        <div id="signupalert" style="display:none" class="alert alert-danger">
+                            <p>Error:</p>
+                            <span></span>
+                        </div>
+                            
+                        <div class="form-group">
+                            <label for="firstname" class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="uname" value="<%= records.name %>" placeholder="Enter Your Name">
+                            </div>
+                        </div>
+                          
+                        <div class="form-group">
+                            <label for="email" class="col-md-3 control-label">Email</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="email" value="<%= records.email %>" placeholder="Email Address">
+                            </div>
+                        </div>
+                            
+                        
+                        <div class="form-group">
+                            <label for="lastname" class="col-md-3 control-label">Employee Type</label>
+                            <div class="col-md-9">
+ <select class="form-control" name="emptype">
+   <option value="Hourly" <% if(records.etype =="Hourly"){ %> selected <% } %>>Hourly</option>
+   <option value="Fixed" <% if(records.etype =="Fixed"){ %> selected <% } %>>Fixed</option>
+ </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-md-3 control-label">Hourly Rate</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="hrlyrate" value="<%= records.hourlyrate %>" placeholder="Enter Hourly Rate">
+                            </div>
+                        </div>
+                            
+                        <div class="form-group">
+                            <label for="icode" class="col-md-3 control-label"> Total Hour</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="ttlhr" value="<%= records.totalHour %>" placeholder="Enter Total Hours">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <!-- Button -->                                        
+                            <div class="col-md-offset-3 col-md-9">
+                            <input type="submit" name="submit" value="submit" class="btn btn-primary">   
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                    </form>
+                 </div>
+            </div>
+
+       
+       
+        
+ </div> 
+    </div>
+  </div>
+  </body>
+</html>
