@@ -9,6 +9,7 @@ var employeeSchema =new mongoose.Schema({
 	hourlyrate: Number,
 	totalHour: Number,
 	total: Number,
+	image:String,
 });
 
 var employeeModel = mongoose.model('Employee', employeeSchema);

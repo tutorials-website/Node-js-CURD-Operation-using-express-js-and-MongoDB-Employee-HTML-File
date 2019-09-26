@@ -9,7 +9,28 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   </head>
   <body>
-     
+    
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Employee Salary Management</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Password Category </a>
+            <ul class="dropdown-menu">
+                <li><a href="#" class="dropdown-item">Add New Category</a></li>
+              <li><a href="#" class="dropdown-item">View All Category</a></li>
+            </ul></li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Password Details </a>
+              <ul class="dropdown-menu">
+                  <li><a href="#" class="dropdown-item">Add New Password</a></li>
+                <li><a href="#" class="dropdown-item">View All Password</a></li>
+              </ul></li>
+        </ul>
+       
+      </div>
+    </nav>
    <div class="container">
         <div class="row">
           <% if(success !=''){%>
@@ -73,6 +94,7 @@
             <th>Hourly Rate</th>
             <th>Total Hours</th>
             <th>Total Amount</th>
+            <th>Profile Image</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -86,6 +108,11 @@
             <td><%= row.hourlyrate %></td>
             <td><%= row.totalHour %></td>
             <td><%= row.total %></td>
+            <td>
+              <% if(row.image){ %>
+              <img src="./uploads/<%= row.image %>" alt="profile image" width="80">
+            <% } %>
+            </td>
             <td><a class="btn btn-primary btn-xs" href="/edit/<%= row._id %>"><i class="fa fa-edit"></i></a>
               <a class="btn btn-danger btn-xs" href="/delete/<%= row._id %>"><i class="fa fa-trash"></i></a>
             </td>
@@ -109,7 +136,7 @@
                     <div class="panel-title">Employee Details Form</div>
                      </div>  
                 <div class="panel-body" >
-                    <form action="/" id="EmployeeForm" class="form-horizontal" method="post"  role="form">
+                    <form action="/" id="EmployeeForm" class="form-horizontal" method="post"  role="form" enctype="multipart/form-data">
                         
                         <div id="signupalert" style="display:none" class="alert alert-danger">
                             <p>Error:</p>
@@ -151,6 +178,13 @@
                             <label for="icode" class="col-md-3 control-label"> Total Hour</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="ttlhr" placeholder="Enter Total Hours">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="icode" class="col-md-3 control-label"> Profile Image</label>
+                            <div class="col-md-9">
+                                <input type="file" class="form-control" name="file" >
                             </div>
                         </div>
 

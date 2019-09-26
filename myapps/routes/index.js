@@ -26,6 +26,8 @@ var Storage= multer.diskStorage({
 var upload = multer({
   storage:Storage
 }).single('file');
+
+
 /* GET home page. */
 router.post('/upload', upload,function(req, res, next) {
   var imageFile=req.file.filename;
@@ -87,7 +89,7 @@ router.get('/logout',function(req, res, next) {
 
 
 
-router.post('/', function(req, res, next) {
+router.post('/', upload, function(req, res, next) {
   var empDetails = new empModel({
     name: req.body.uname,
     email: req.body.email,
@@ -95,6 +97,7 @@ router.post('/', function(req, res, next) {
     hourlyrate: req.body.hrlyrate,
     totalHour: req.body.ttlhr,
     total: parseInt(req.body.hrlyrate) * parseInt(req.body.ttlhr),
+    image:req.file.filename,
   });
 
   empDetails.save(function(err,req1){
@@ -167,22 +170,39 @@ res.render('edit', { title: 'Edit Employee Record', records:data });
   
 });
 
-router.post('/update/', function(req, res, next) {
+router.post('/update/', upload,function(req, res, next) {
  
-var update= empModel.findByIdAndUpdate(req.body.id,{
+  if(req.file){
+
+var dataRecords={
   name: req.body.uname,
     email: req.body.email,
     etype: req.body.emptype,
     hourlyrate: req.body.hrlyrate,
     totalHour: req.body.ttlhr,
     total: parseInt(req.body.hrlyrate) * parseInt(req.body.ttlhr),
-});
+    image:req.file.filename,
+}
+  }else{
+
+    var dataRecords={
+      name: req.body.uname,
+        email: req.body.email,
+        etype: req.body.emptype,
+        hourlyrate: req.body.hrlyrate,
+        totalHour: req.body.ttlhr,
+        total: parseInt(req.body.hrlyrate) * parseInt(req.body.ttlhr),
+      
+    }
+  }
+
+
+var update= empModel.findByIdAndUpdate(req.body.id,dataRecords);
 update.exec(function(err,data){
 if(err) throw err;
 employee.exec(function(err,data){
   if(err) throw err;
-  res.render('index', { title: 'Employee Records', records:data, success:'Record Updated Successfully' });
-    });
+  res.redirect("/");  });
   });
   
 });
